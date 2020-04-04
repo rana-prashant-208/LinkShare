@@ -44,18 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 handleSendText(intent); // Handle text being sent
             }
         }
-        try {
-//            Toast.makeText(this, "URL "+ DocsQuickStart_test.getURL(this), Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "URL "+ e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-//       Intent myIntent = new Intent(MainActivity.this, LoadLink.class);
-//        startActivity(myIntent);
     }
 
     private void handleSendText(Intent intent) {
-        new LinkHandler().sendLink(intent.getStringExtra(Intent.EXTRA_TEXT),this);
+        LinkHandler.sendLink(intent.getStringExtra(Intent.EXTRA_TEXT),this);
         finish();
     }
 
@@ -105,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 pending);
 
         Intent myIntent2 = new Intent(MainActivity.this, LinkHandler.class);
-        myIntent.putExtra("ACTION","SEND");
+        myIntent2.putExtra("ACTION","SEND");
         PendingIntent pending2 = PendingIntent.getActivity(this, 8, myIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.addAction(R.drawable.ic_android_circle, "Share",
                 pending2);

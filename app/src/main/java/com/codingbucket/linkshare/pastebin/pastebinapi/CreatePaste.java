@@ -1,4 +1,4 @@
-package com.codingbucket.linkshare.pastebinapi;
+package com.codingbucket.linkshare.pastebin.pastebinapi;
 
 import java.io.*;
 

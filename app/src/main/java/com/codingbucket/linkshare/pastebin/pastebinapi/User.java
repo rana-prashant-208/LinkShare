@@ -1,7 +1,5 @@
-package com.codingbucket.linkshare.pastebinapi;
+package com.codingbucket.linkshare.pastebin.pastebinapi;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
