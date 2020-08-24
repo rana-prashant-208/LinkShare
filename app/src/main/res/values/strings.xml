@@ -6,4 +6,6 @@
     <string name="channel_description">shutup</string>
     <string name="pick_Concat_label">Pick contact</string>
     <string name="create_notification">Create Notification</string>
+    <string name="preference_file_key">coding_bucket_linkshare</string>
+    <string name="hostAddress">host</string>
 </resources>

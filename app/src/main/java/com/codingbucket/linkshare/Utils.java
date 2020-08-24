@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.net.Uri;
 import android.widget.Toast;
@@ -19,15 +20,26 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class Utils {
     public static boolean setClipboardText(Context context, String textToSet) {
+        try{
+            if(textToSet.equalsIgnoreCase("")){
+                Toast.makeText(context, "Nothing to set", Toast.LENGTH_SHORT).show();
+            }
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("From Linkshare", textToSet);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(context, "LinkShare " + textToSet, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "LinkShare " + textToSet, Toast.LENGTH_SHORT).show();
         return true;
+    }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    public static void openText(LinkHandler linkHandler, String link) {
+    public static void openText(Context linkHandler, String link) {
         try {
+            if(link.equalsIgnoreCase("")){
+                Toast.makeText(linkHandler, "Nothing to open", Toast.LENGTH_SHORT).show();
+            }
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(link));
             linkHandler.startActivity(i);
@@ -139,5 +151,20 @@ public class Utils {
 
         // Shouldn't get here, but just in case...
         return "";
+    }
+    public static void saveSetting(Context c,String paramname,String paramValue) {
+        SharedPreferences sharedPref = c.getSharedPreferences(
+                "coding_bucket_linkshare", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(paramname,paramValue);
+        editor.commit();
+    }
+    public static String getSetting(Context c,String paramName) {
+        return getSetting(c,paramName,"");
+    }
+    public static String getSetting(Context c,String paramName,String defaultValue) {
+        SharedPreferences sharedPref = c.getSharedPreferences(
+                "coding_bucket_linkshare", Context.MODE_PRIVATE);
+        return sharedPref.getString(paramName, defaultValue);
     }
 }
