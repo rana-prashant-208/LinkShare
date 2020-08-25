@@ -29,14 +29,12 @@ public class LinkHandler extends Activity {
                 Utils.setClipboardText(this,link);
                 Utils.openText(this,link);
                 break;
-            case "SEND":
-                String text=Utils.getClipboardText(this);
-                if(text!=null||text.equalsIgnoreCase("")){
-                Toast.makeText(this, "Nothing to share", Toast.LENGTH_LONG).show();
-                return;
-                }
-            boolean sent = baseLinkHandler.sendLink(text,getHostName(this));
-            Toast.makeText(this, sent?"LinkShare ":"Failed to Send", Toast.LENGTH_LONG).show();
+            case "MUTE":
+                LaptopControlsHandler.muteClicked(null, this);
+                break;
+
+            case "UNMUTE":
+                LaptopControlsHandler.unmuteClicked(null, this);
                 break;
             }
     }

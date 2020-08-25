@@ -198,10 +198,16 @@ public class MainActivity extends AppCompatActivity {
                 pending);
 
         Intent myIntent2 = new Intent(MainActivity.this, LinkHandler.class);
-        myIntent2.putExtra("ACTION","SEND");
+        myIntent2.putExtra("ACTION","MUTE");
         PendingIntent pending2 = PendingIntent.getActivity(this, 8, myIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(R.drawable.ic_android_circle, "Share",
+        builder.addAction(R.drawable.ic_android_circle, "Mute",
                 pending2);
+
+        Intent myIntent3 = new Intent(MainActivity.this, LinkHandler.class);
+        myIntent3.putExtra("ACTION","UNMUTE");
+        PendingIntent pending3 = PendingIntent.getActivity(this, 7, myIntent3, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.addAction(R.drawable.ic_android_circle, "Unmute",
+                pending3);
 
         notificationManager.notify(NOTIFICATION_ID, builder.build());
         setNotification(true);
